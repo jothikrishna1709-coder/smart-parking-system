@@ -1,0 +1,401 @@
+[{
+		"slot_id":	"A-01",
+		"floor":	1,
+		"zone":	"Zone C (Accessible)",
+		"category":	"ACCESSIBLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	10
+	}, {
+		"slot_id":	"A-02",
+		"floor":	1,
+		"zone":	"Zone C (Accessible)",
+		"category":	"ACCESSIBLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	12
+	}, {
+		"slot_id":	"A-03",
+		"floor":	1,
+		"zone":	"Zone C (Accessible)",
+		"category":	"ACCESSIBLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	14
+	}, {
+		"slot_id":	"A-04",
+		"floor":	1,
+		"zone":	"Zone C (Accessible)",
+		"category":	"ACCESSIBLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	16
+	}, {
+		"slot_id":	"A-05",
+		"floor":	1,
+		"zone":	"Zone C (Accessible)",
+		"category":	"ACCESSIBLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	18
+	}, {
+		"slot_id":	"A-06",
+		"floor":	1,
+		"zone":	"Zone C (Accessible)",
+		"category":	"ACCESSIBLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	20
+	}, {
+		"slot_id":	"M-01",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	17.5
+	}, {
+		"slot_id":	"M-02",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	20
+	}, {
+		"slot_id":	"M-03",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	22.5
+	}, {
+		"slot_id":	"M-04",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	25
+	}, {
+		"slot_id":	"M-05",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	27.5
+	}, {
+		"slot_id":	"M-06",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	30
+	}, {
+		"slot_id":	"M-07",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	32.5
+	}, {
+		"slot_id":	"M-08",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	35
+	}, {
+		"slot_id":	"M-09",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	37.5
+	}, {
+		"slot_id":	"M-10",
+		"floor":	1,
+		"zone":	"Zone B (Bikes)",
+		"category":	"MOTORCYCLE",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	40
+	}, {
+		"slot_id":	"C-01",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"OCCUPIED",
+		"occupied_reg":	"TN30BF3333",
+		"occupied_time":	1792037050,
+		"reservation_id":	"",
+		"distance":	23
+	}, {
+		"slot_id":	"C-02",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"OCCUPIED",
+		"occupied_reg":	"TN30BF6666",
+		"occupied_time":	1792336561,
+		"reservation_id":	"",
+		"distance":	26
+	}, {
+		"slot_id":	"C-03",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"OCCUPIED",
+		"occupied_reg":	"TN07HJ7876",
+		"occupied_time":	1792035881,
+		"reservation_id":	"",
+		"distance":	29
+	}, {
+		"slot_id":	"C-04",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"OCCUPIED",
+		"occupied_reg":	"TN30BF4231",
+		"occupied_time":	1792337709,
+		"reservation_id":	"",
+		"distance":	32
+	}, {
+		"slot_id":	"C-05",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	35
+	}, {
+		"slot_id":	"C-06",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	38
+	}, {
+		"slot_id":	"C-07",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	41
+	}, {
+		"slot_id":	"C-08",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	44
+	}, {
+		"slot_id":	"C-09",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	47
+	}, {
+		"slot_id":	"C-10",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	50
+	}, {
+		"slot_id":	"C-11",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	53
+	}, {
+		"slot_id":	"C-12",
+		"floor":	1,
+		"zone":	"Zone A (Ground Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	56
+	}, {
+		"slot_id":	"C-13",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	59
+	}, {
+		"slot_id":	"C-14",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	62
+	}, {
+		"slot_id":	"C-15",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	65
+	}, {
+		"slot_id":	"C-16",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	68
+	}, {
+		"slot_id":	"C-17",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	71
+	}, {
+		"slot_id":	"C-18",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	74
+	}, {
+		"slot_id":	"C-19",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	77
+	}, {
+		"slot_id":	"C-20",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	80
+	}, {
+		"slot_id":	"C-21",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	83
+	}, {
+		"slot_id":	"C-22",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	86
+	}, {
+		"slot_id":	"C-23",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	89
+	}, {
+		"slot_id":	"C-24",
+		"floor":	2,
+		"zone":	"Zone D (Floor 2 Cars)",
+		"category":	"CAR",
+		"status":	"AVAILABLE",
+		"occupied_reg":	"",
+		"occupied_time":	0,
+		"reservation_id":	"",
+		"distance":	92
+	}]

@@ -1,0 +1,11 @@
+{
+	"car_first_hour":	45,
+	"car_subsequent_hour":	20,
+	"bike_first_hour":	15,
+	"bike_subsequent_hour":	10,
+	"accessible_first_hour":	20,
+	"accessible_subsequent_hour":	15,
+	"grace_period_minutes":	15,
+	"min_charge":	15,
+	"rounding_minutes":	30
+}

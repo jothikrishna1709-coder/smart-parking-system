@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Parking Management System | DSA Capstone</title>
+    <meta name="description" content="Advanced Smart Parking Management System powered by native C Data Structures and Algorithms with a modern web dashboard.">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-badge">P</div>
+                <div class="brand-text">
+                    <h1>SmartPark Pro</h1>
+                    <p>DSA C-Engine v1.0</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Operations</div>
+                <a class="nav-item active" data-view="dashboard" id="nav-dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>Dashboard</span>
+                </a>
+                <a class="nav-item" data-view="slots" id="nav-slots">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    <span>Live Parking Slots</span>
+                    <span class="badge" id="badge-avail-slots">--</span>
+                </a>
+                <a class="nav-item" data-view="entry" id="nav-entry">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                    <span>Vehicle Entry</span>
+                </a>
+                <a class="nav-item" data-view="exit" id="nav-exit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span>Exit & Billing</span>
+                </a>
+                <a class="nav-item" data-view="queue" id="nav-queue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>Waiting Queue</span>
+                    <span class="badge" id="badge-queue-count">0</span>
+                </a>
+
+                <div class="nav-section-title">Management</div>
+                <a class="nav-item" data-view="reservations" id="nav-reservations">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>Reservations</span>
+                </a>
+                <a class="nav-item" data-view="search" id="nav-search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>Vehicle Search</span>
+                </a>
+                <a class="nav-item" data-view="history" id="nav-history">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>Parking History</span>
+                </a>
+                <a class="nav-item" data-view="analytics" id="nav-analytics">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <span>DSA Analytics & Graph</span>
+                </a>
+                <a class="nav-item" data-view="settings" id="nav-settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="backend-indicator" id="backend-status-indicator" style="cursor: pointer;" title="Backend Connection Status - Click to test or reconnect">
+                    <span class="status-dot" id="status-dot"></span>
+                    <span id="backend-status-text">C Backend Online</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <main class="main-wrapper">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="page-title">
+                    <h2 id="topbar-title">Facility Dashboard</h2>
+                    <p id="topbar-desc">Real-time status of parking capacity and DSA core operations</p>
+                </div>
+                <div class="topbar-actions">
+                    <button class="btn btn-secondary" id="btn-quick-refresh" title="Refresh Live Data">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                        Refresh
+                    </button>
+                    <button class="btn btn-primary" id="btn-quick-entry">
+                        + New Entry
+                    </button>
+                </div>
+            </header>
+
+            <!-- Offline / Fallback Notice Banner -->
+            <div class="offline-banner" id="offline-banner" style="display: none;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 16px;">⚡</span>
+                    <span><strong>C Backend Offline:</strong> Running on in-browser DSA engine. Start server via <code>python backend/run_server.py 8080</code> or <code>npm start</code> to connect to the native C engine.</span>
+                </div>
+                <button class="btn btn-secondary" id="btn-reconnect-backend" style="padding: 4px 12px; font-size: 12px; height: auto; cursor: pointer;">
+                    🔄 Reconnect C Backend
+                </button>
+            </div>
+
+            <!-- Viewport -->
+            <div class="content-viewport">
+                <!-- 1. DASHBOARD VIEW -->
+                <section class="view-panel active" id="view-dashboard">
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon-box blue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="stat-total-slots">--</h3>
+                                <p>Total Parking Slots</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon-box green">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="stat-available-slots">--</h3>
+                                <p>Available Slots</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon-box red">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="stat-occupied-slots">--</h3>
+                                <p>Occupied Slots</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon-box amber">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="stat-reserved-slots">--</h3>
+                                <p>Reserved Slots</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon-box purple">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="stat-today-revenue">$0.00</h3>
+                                <p>Today's Revenue</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Occupancy & Distribution</h3>
+                                <span class="badge" id="badge-occupancy-rate">0% Occupied</span>
+                            </div>
+                            <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 24px;">
+                                <div style="flex: 1;">
+                                    <div style="height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden; display: flex;">
+                                        <div id="bar-occ-fill" style="width: 0%; background: #ef4444; transition: width 0.5s ease;"></div>
+                                        <div id="bar-res-fill" style="width: 0%; background: #f59e0b; transition: width 0.5s ease;"></div>
+                                        <div id="bar-avail-fill" style="width: 100%; background: #10b981; transition: width 0.5s ease;"></div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 11px; margin-top: 6px; color: var(--text-secondary);">
+                                        <span>Occupied (<span id="txt-occ-count">0</span>)</span>
+                                        <span>Reserved (<span id="txt-res-count">0</span>)</span>
+                                        <span>Available (<span id="txt-avail-count">0</span>)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 style="font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Vehicle Type Breakdown</h4>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                                <div style="background: #f8fafc; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-color);">
+                                    <div style="font-size: 20px;">🚗</div>
+                                    <div style="font-size: 18px; font-weight: 800; margin-top: 4px;" id="dist-cars">0</div>
+                                    <div style="font-size: 11px; color: var(--text-secondary);">Cars</div>
+                                </div>
+                                <div style="background: #f8fafc; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-color);">
+                                    <div style="font-size: 20px;">🏍️</div>
+                                    <div style="font-size: 18px; font-weight: 800; margin-top: 4px;" id="dist-bikes">0</div>
+                                    <div style="font-size: 11px; color: var(--text-secondary);">Motorcycles</div>
+                                </div>
+                                <div style="background: #f8fafc; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-color);">
+                                    <div style="font-size: 20px;">♿</div>
+                                    <div style="font-size: 18px; font-weight: 800; margin-top: 4px;" id="dist-accessible">0</div>
+                                    <div style="font-size: 11px; color: var(--text-secondary);">Accessible</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Recent Activity</h3>
+                                <span style="font-size: 12px; color: var(--text-muted);">Real-time</span>
+                            </div>
+                            <div id="recent-activity-list" style="display: flex; flex-direction: column; gap: 12px;">
+                                <p style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">No recent transactions yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. LIVE PARKING SLOTS VIEW -->
+                <section class="view-panel" id="view-slots">
+                    <div class="filter-bar">
+                        <div class="tab-group" id="floor-tabs">
+                            <button class="tab-btn active" data-floor="all">All Floors</button>
+                            <button class="tab-btn" data-floor="1">Floor 1 (Ground)</button>
+                            <button class="tab-btn" data-floor="2">Floor 2</button>
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <select class="form-control" id="slot-category-filter" style="width: 160px; padding: 8px 12px;">
+                                <option value="all">All Categories</option>
+                                <option value="CAR">Cars</option>
+                                <option value="MOTORCYCLE">Bikes</option>
+                                <option value="ACCESSIBLE">Accessible</option>
+                            </select>
+
+                            <select class="form-control" id="slot-status-filter" style="width: 150px; padding: 8px 12px;">
+                                <option value="all">All Statuses</option>
+                                <option value="AVAILABLE">Available</option>
+                                <option value="OCCUPIED">Occupied</option>
+                                <option value="RESERVED">Reserved</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="parking-slots-grid" id="slots-container">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </section>
+
+                <!-- 3. VEHICLE ENTRY VIEW -->
+                <section class="view-panel" id="view-entry">
+                    <div class="form-card">
+                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">New Vehicle Entry</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;">Assign optimal available slot using C allocation algorithm</p>
+
+                        <form id="entry-form">
+                            <div class="form-group">
+                                <label class="form-label" for="entry-reg">Vehicle Registration Number *</label>
+                                <input type="text" class="form-control" id="entry-reg" placeholder="e.g. TN-01-AB-1234" required style="font-family: var(--font-mono); font-size: 16px; text-transform: uppercase;">
+                                <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block;">Alphanumeric plate (3-12 characters, letters and numbers)</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="entry-type">Vehicle Category *</label>
+                                <select class="form-control" id="entry-type" required>
+                                    <option value="CAR">Car / SUV</option>
+                                    <option value="MOTORCYCLE">Motorcycle / Scooter</option>
+                                    <option value="ACCESSIBLE">Accessible / Mobility Impaired</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="entry-owner">Driver / Owner Name (Optional)</label>
+                                <input type="text" class="form-control" id="entry-owner" placeholder="Full Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="entry-contact">Contact Phone Number (Optional)</label>
+                                <input type="tel" class="form-control" id="entry-contact" placeholder="+91 98765 43210">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="entry-reservation">Reservation Code (If booked previously)</label>
+                                <input type="text" class="form-control" id="entry-reservation" placeholder="e.g. RES-20261010-101" style="font-family: var(--font-mono);">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                                Allocate Slot & Generate Entry Ticket
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- 4. VEHICLE EXIT & BILLING VIEW -->
+                <section class="view-panel" id="view-exit">
+                    <div class="form-card">
+                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">Vehicle Exit & Fee Settlement</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;">Search active parked record to compute parking duration and fee</p>
+
+                        <form id="exit-lookup-form" style="margin-bottom: 28px;">
+                            <div class="form-group">
+                                <label class="form-label" for="exit-query">Search by Registration Plate or Ticket ID *</label>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="text" class="form-control" id="exit-query" placeholder="Enter Registration or Ticket ID" required style="font-family: var(--font-mono); text-transform: uppercase;">
+                                    <button type="submit" class="btn btn-primary" style="flex-shrink: 0;">Calculate Fee</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div id="exit-billing-result" style="display: none; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; background: #f8fafc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px dashed #cbd5e1;">
+                                <h4 style="font-size: 16px; font-weight: 700;">Billing Breakdown</h4>
+                                <span class="badge" id="bill-ticket-id" style="font-family: var(--font-mono);">TCK-1001</span>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px; margin-bottom: 16px;">
+                                <div><span style="color: var(--text-secondary);">Vehicle Plate:</span> <strong id="bill-plate" style="font-family: var(--font-mono);">--</strong></div>
+                                <div><span style="color: var(--text-secondary);">Allocated Slot:</span> <strong id="bill-slot">--</strong></div>
+                                <div><span style="color: var(--text-secondary);">Entry Time:</span> <span id="bill-entry-time">--</span></div>
+                                <div><span style="color: var(--text-secondary);">Exit Time:</span> <span id="bill-exit-time">--</span></div>
+                                <div><span style="color: var(--text-secondary);">Parked Duration:</span> <strong id="bill-duration">--</strong></div>
+                                <div><span style="color: var(--text-secondary);">Vehicle Category:</span> <span id="bill-category">--</span></div>
+                            </div>
+
+                            <div style="background: #ffffff; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;">
+                                    <span>First Hour Rate:</span>
+                                    <span id="bill-base-fee">$0.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;">
+                                    <span>Subsequent Hours:</span>
+                                    <span id="bill-subsequent-fee">$0.00</span>
+                                </div>
+                                <div id="bill-grace-notice" style="font-size: 12px; color: #10b981; font-weight: 600; display: none;">
+                                    ✓ Exited within grace period (15 mins free)
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; margin-top: 10px; padding-top: 8px; border-top: 1px solid #e2e8f0; color: var(--text-primary);">
+                                    <span>Total Payable Fee:</span>
+                                    <span id="bill-total-fee">$0.00</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 12px;">
+                                <button type="button" class="btn btn-secondary" id="btn-cancel-checkout" style="flex: 1;">Cancel</button>
+                                <button type="button" class="btn btn-success" id="btn-confirm-checkout" style="flex: 2;">Confirm Payment & Checkout Vehicle</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. WAITING QUEUE VIEW -->
+                <section class="view-panel" id="view-queue">
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
+                            <div>
+                                <h3>FIFO Waiting Queue (Custom Linked-List)</h3>
+                                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Vehicles enqueued when lot is full; auto-promoted O(1) upon vehicle checkout</p>
+                            </div>
+                            <button class="btn btn-primary" id="btn-open-queue-modal">+ Enqueue Vehicle</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Queue Position</th>
+                                        <th>Waiting ID</th>
+                                        <th>Registration Number</th>
+                                        <th>Vehicle Category</th>
+                                        <th>Owner Name</th>
+                                        <th>Contact</th>
+                                        <th>Enqueued Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="queue-table-body">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. RESERVATIONS VIEW -->
+                <section class="view-panel" id="view-reservations">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h3>Slot Reservations</h3>
+                                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Pre-book parking slots with conflict prevention and expiration timers</p>
+                            </div>
+                            <button class="btn btn-primary" id="btn-open-reservation-modal">+ New Reservation</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Reservation ID</th>
+                                        <th>Vehicle Plate</th>
+                                        <th>Category</th>
+                                        <th>Reserved Slot</th>
+                                        <th>Customer Name</th>
+                                        <th>Contact</th>
+                                        <th>Booked Time</th>
+                                        <th>Expiry Time</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reservations-table-body">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. VEHICLE SEARCH VIEW -->
+                <section class="view-panel" id="view-search">
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
+                            <h3>Real-time Vehicle Lookup</h3>
+                            <span class="badge" style="background: #eff6ff; color: #2563eb;">Hash Table O(1) Engine</span>
+                        </div>
+                        <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                            <input type="text" class="form-control" id="search-input" placeholder="Search by registration plate, slot ID, owner, or ticket..." style="font-size: 15px;">
+                            <button class="btn btn-primary" id="btn-perform-search">Search</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Ticket ID</th>
+                                        <th>Registration Plate</th>
+                                        <th>Slot ID</th>
+                                        <th>Category</th>
+                                        <th>Owner Name</th>
+                                        <th>Contact</th>
+                                        <th>Entry Timestamp</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="search-results-body">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. PARKING HISTORY VIEW -->
+                <section class="view-panel" id="view-history">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h3>Parking Transaction History</h3>
+                                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Audit trail sorted via custom C Merge Sort & Quick Sort</p>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <select class="form-control" id="history-sort-by" style="width: 160px; padding: 6px 12px;">
+                                    <option value="time">Sort: Entry Time</option>
+                                    <option value="fee">Sort: Fee Charged</option>
+                                </select>
+                                <select class="form-control" id="history-order" style="width: 140px; padding: 6px 12px;">
+                                    <option value="desc">Descending</option>
+                                    <option value="asc">Ascending</option>
+                                </select>
+                                <a class="btn btn-secondary" id="btn-export-csv" href="/api/history/export" target="_blank" download="parking_history.csv">
+                                    Export CSV
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction ID</th>
+                                        <th>Ticket ID</th>
+                                        <th>Registration Plate</th>
+                                        <th>Category</th>
+                                        <th>Slot ID</th>
+                                        <th>Owner Name</th>
+                                        <th>Entry Time</th>
+                                        <th>Exit Time</th>
+                                        <th>Duration</th>
+                                        <th>Fee Charged</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="history-table-body">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. DSA ANALYTICS & GRAPH NAVIGATION VIEW -->
+                <section class="view-panel" id="view-analytics">
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>DSA Engine Complexity & Diagnostics</h3>
+                                <span class="badge" style="background: #ecfdf5; color: #065f46;">Live C Metrics</span>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                                <div style="background: #f8fafc; padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                                    <h4 style="font-size: 14px; font-weight: 700; color: var(--accent-blue); margin-bottom: 8px;">Registration Hash Table</h4>
+                                    <div style="font-size: 12px; line-height: 1.8;">
+                                        <div><strong>Algorithm:</strong> DJB2 Polynomial Hash</div>
+                                        <div><strong>Collision Handling:</strong> Separate Chaining</div>
+                                        <div><strong>Table Capacity:</strong> <span id="dsa-ht-cap">--</span></div>
+                                        <div><strong>Stored Keys:</strong> <span id="dsa-ht-count">--</span></div>
+                                        <div><strong>Total Collisions:</strong> <span id="dsa-ht-coll">--</span></div>
+                                        <div><strong>Current Load Factor:</strong> <span id="dsa-ht-load">--</span></div>
+                                        <div><strong>Complexity:</strong> Average O(1), Worst O(n)</div>
+                                    </div>
+                                </div>
+
+                                <div style="background: #f8fafc; padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                                    <h4 style="font-size: 14px; font-weight: 700; color: #10b981; margin-bottom: 8px;">Waiting FIFO Queue</h4>
+                                    <div style="font-size: 12px; line-height: 1.8;">
+                                        <div><strong>Type:</strong> Doubly/Singly Linked FIFO</div>
+                                        <div><strong>Enqueue Complexity:</strong> O(1) Tail Pointer</div>
+                                        <div><strong>Dequeue Complexity:</strong> O(1) Head Pointer</div>
+                                        <div><strong>Waiting Count:</strong> <span id="dsa-q-count">--</span></div>
+                                        <div><strong>Eligibility Filter:</strong> Preserves order</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="background: #f8fafc; padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                                <h4 style="font-size: 14px; font-weight: 700; color: #8b5cf6; margin-bottom: 8px;">Facility Graph & Sorting</h4>
+                                <div style="font-size: 12px; line-height: 1.8;">
+                                    <div><strong>Facility Representation:</strong> Adjacency List Weighted Graph (<span id="dsa-graph-nodes">--</span> Vertices)</div>
+                                    <div><strong>Navigation Algorithms:</strong> Dijkstra O(V²), BFS O(V + E)</div>
+                                    <div><strong>History Sorting:</strong> Stable Merge Sort O(n log n)</div>
+                                    <div><strong>Vehicle Sorting:</strong> Quick Sort with Median-of-Three O(n log n)</div>
+                                    <div><strong>Precondition Validation:</strong> Strictly verified before Binary Search</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Shortest-Path Facility Navigation</h3>
+                                <span class="badge" style="background: #fffbeb; color: #92400e;">Dijkstra Algorithm</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="nav-entrance-select">Select Facility Entrance</label>
+                                <select class="form-control" id="nav-entrance-select">
+                                    <option value="ENT_NORTH">North Main Entrance (Ground Floor)</option>
+                                    <option value="ENT_SOUTH">South Gate Entrance (Ground Floor)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="nav-slot-select">Select Destination Slot</label>
+                                <select class="form-control" id="nav-slot-select">
+                                    <!-- Populated dynamically with all slots -->
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary" id="btn-calculate-nav" style="width: 100%;">
+                                Calculate Shortest Path (Dijkstra)
+                            </button>
+
+                            <div id="nav-path-result" style="display: none;">
+                                <div class="nav-path-box">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;">
+                                        <span>Total Distance: <strong id="nav-total-dist">--</strong></span>
+                                        <span>Hops: <strong id="nav-total-hops">--</strong></span>
+                                    </div>
+                                    <div id="nav-steps-list">
+                                        <!-- Rendered dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 10. SETTINGS VIEW -->
+                <section class="view-panel" id="view-settings">
+                    <div class="form-card">
+                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">Pricing & System Policies</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;">Configures hourly pricing rules persisted directly to C backend settings</p>
+
+                        <form id="settings-form">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div class="form-group">
+                                    <label class="form-label" for="set-car-first">Car Initial Hour Rate ($)</label>
+                                    <input type="number" step="0.5" class="form-control" id="set-car-first" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="set-car-sub">Car Subsequent Hour ($)</label>
+                                    <input type="number" step="0.5" class="form-control" id="set-car-sub" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="set-bike-first">Bike Initial Hour Rate ($)</label>
+                                    <input type="number" step="0.5" class="form-control" id="set-bike-first" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="set-bike-sub">Bike Subsequent Hour ($)</label>
+                                    <input type="number" step="0.5" class="form-control" id="set-bike-sub" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="set-acc-first">Accessible Initial Hour ($)</label>
+                                    <input type="number" step="0.5" class="form-control" id="set-acc-first" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="set-acc-sub">Accessible Subsequent Hour ($)</label>
+                                    <input type="number" step="0.5" class="form-control" id="set-acc-sub" required>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div class="form-group">
+                                    <label class="form-label" for="set-grace">Grace Period (Minutes)</label>
+                                    <input type="number" class="form-control" id="set-grace" required>
+                                    <span style="font-size: 11px; color: var(--text-muted);">Free if exited within threshold</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="set-min-charge">Minimum Billable Fee ($)</label>
+                                    <input type="number" step="0.5" class="form-control" id="set-min-charge" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                                Save & Update Pricing Policy
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Slot Details & Navigation Modal -->
+    <div class="modal-overlay" id="modal-slot-detail">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-slot-title">Slot C-01</h3>
+                <button class="close-btn" id="btn-close-slot-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px; margin-bottom: 16px;">
+                    <div>Status: <span id="modal-slot-status" class="badge">--</span></div>
+                    <div>Category: <strong id="modal-slot-category">--</strong></div>
+                    <div>Floor: <span id="modal-slot-floor">--</span></div>
+                    <div>Zone: <span id="modal-slot-zone">--</span></div>
+                    <div style="grid-column: span 2;">Occupied Plate: <strong id="modal-slot-plate" style="font-family: var(--font-mono);">--</strong></div>
+                </div>
+
+                <h4 style="font-size: 14px; font-weight: 700; margin-top: 16px; margin-bottom: 8px;">Driving Directions (From North Entrance)</h4>
+                <div id="modal-slot-nav-steps" style="font-size: 12px; background: #f8fafc; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                    Calculating Dijkstra route...
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-close-slot-modal-footer">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ticket Generated Modal -->
+    <div class="modal-overlay" id="modal-ticket">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Entry Ticket Generated</h3>
+                <button class="close-btn" id="btn-close-ticket-modal">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #ecfdf5; color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 28px;">✓</div>
+                <h4 style="font-size: 22px; font-family: var(--font-mono); margin-bottom: 6px;" id="modal-ticket-id">TCK-...</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Please display this ticket or retain registration plate upon exit</p>
+
+                <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; text-align: left; font-size: 13px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>Registration: <strong id="modal-ticket-plate" style="font-family: var(--font-mono);">--</strong></div>
+                    <div>Assigned Slot: <strong id="modal-ticket-slot" style="color: var(--accent-blue); font-size: 15px;">--</strong></div>
+                    <div style="grid-column: span 2;">Entry Timestamp: <span id="modal-ticket-time">--</span></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="btn-done-ticket" style="width: 100%;">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enqueue Modal -->
+    <div class="modal-overlay" id="modal-queue">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Enqueue Waiting Vehicle</h3>
+                <button class="close-btn" id="btn-close-queue-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="queue-form">
+                    <div class="form-group">
+                        <label class="form-label" for="queue-reg">Vehicle Registration *</label>
+                        <input type="text" class="form-control" id="queue-reg" placeholder="e.g. TN01AB9999" required style="font-family: var(--font-mono); text-transform: uppercase;">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="queue-type">Vehicle Category *</label>
+                        <select class="form-control" id="queue-type" required>
+                            <option value="CAR">Car</option>
+                            <option value="MOTORCYCLE">Motorcycle</option>
+                            <option value="ACCESSIBLE">Accessible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="queue-owner">Driver Name</label>
+                        <input type="text" class="form-control" id="queue-owner" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="queue-contact">Phone Number</label>
+                        <input type="tel" class="form-control" id="queue-contact" placeholder="Phone">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Add to FIFO Queue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Reservation Modal -->
+    <div class="modal-overlay" id="modal-reservation">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>New Slot Reservation</h3>
+                <button class="close-btn" id="btn-close-res-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="res-form">
+                    <div class="form-group">
+                        <label class="form-label" for="res-reg">Vehicle Registration *</label>
+                        <input type="text" class="form-control" id="res-reg" placeholder="Registration plate" required style="font-family: var(--font-mono); text-transform: uppercase;">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="res-type">Category *</label>
+                        <select class="form-control" id="res-type" required>
+                            <option value="CAR">Car</option>
+                            <option value="MOTORCYCLE">Motorcycle</option>
+                            <option value="ACCESSIBLE">Accessible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="res-slot-pref">Preferred Slot ID (Optional)</label>
+                        <input type="text" class="form-control" id="res-slot-pref" placeholder="e.g. C-01 (leave empty for auto-assign)" style="font-family: var(--font-mono);">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="res-name">Customer Name</label>
+                        <input type="text" class="form-control" id="res-name" placeholder="Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="res-phone">Phone Number</label>
+                        <input type="tel" class="form-control" id="res-phone" placeholder="Contact Number">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="res-hours">Reservation Duration (Hours)</label>
+                        <input type="number" class="form-control" id="res-hours" value="2" min="1" max="24">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Reservation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="./js/api.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

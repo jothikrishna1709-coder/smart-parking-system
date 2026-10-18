@@ -1,0 +1,41 @@
+[{
+		"ticket_id":	"TCK-20261015-1002",
+		"reg_number":	"TN07HJ7876",
+		"vehicle_type":	"CAR",
+		"slot_id":	"C-03",
+		"owner_name":	"",
+		"contact":	"",
+		"reservation_id":	"",
+		"entry_time":	1792035881,
+		"entry_time_str":	"2026-10-15 09:14:41"
+	}, {
+		"ticket_id":	"TCK-20261015-1003",
+		"reg_number":	"TN30BF3333",
+		"vehicle_type":	"CAR",
+		"slot_id":	"C-01",
+		"owner_name":	"",
+		"contact":	"",
+		"reservation_id":	"",
+		"entry_time":	1792037050,
+		"entry_time_str":	"2026-10-15 09:34:10"
+	}, {
+		"ticket_id":	"TCK-20261018-1001",
+		"reg_number":	"TN30BF6666",
+		"vehicle_type":	"CAR",
+		"slot_id":	"C-02",
+		"owner_name":	"",
+		"contact":	"",
+		"reservation_id":	"",
+		"entry_time":	1792336561,
+		"entry_time_str":	"2026-10-18 20:46:01"
+	}, {
+		"ticket_id":	"TCK-20261018-1002",
+		"reg_number":	"TN30BF4231",
+		"vehicle_type":	"CAR",
+		"slot_id":	"C-04",
+		"owner_name":	"",
+		"contact":	"",
+		"reservation_id":	"",
+		"entry_time":	1792337709,
+		"entry_time_str":	"2026-10-18 21:05:09"
+	}]

@@ -1,0 +1,24 @@
+{
+  "name": "smart-parking-system",
+  "version": "1.0.0",
+  "description": "Smart Parking Management System - College DSA Capstone with Hybrid C Backend, Web Dashboard, and Vercel Cloud Serverless Support",
+  "main": "api/index.js",
+  "scripts": {
+    "build": "node -e \"console.log('Build completed')\"",
+    "start": "node api/index.js",
+    "server": "python backend/run_server.py 8080",
+    "c-server": "python backend/run_server.py 8080",
+    "test": "python backend/run_tests.py"
+  },
+  "keywords": [
+    "data-structures-and-algorithms",
+    "dijkstra",
+    "hash-table",
+    "fifo-queue",
+    "smart-parking",
+    "c",
+    "javascript"
+  ],
+  "author": "jothikrishna1709-coder",
+  "license": "MIT"
+}
